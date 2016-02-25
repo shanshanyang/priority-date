@@ -1,0 +1,26 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "generator-node": "^1.8.3"
+  },
+  "devDependencies": {
+    "cheerio": "^0.20.0",
+    "request": "^2.69.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shanshanyang/prioritydate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shanshanyang/prioritydate/issues"
+  },
+  "homepage": "https://github.com/shanshanyang/prioritydate#readme"
+}
