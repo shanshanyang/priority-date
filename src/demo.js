@@ -1,3 +1,7 @@
-import { priorityDate } from 'dist/index';
+import { priorityDate } from './index';
 
-console.log(priorityDate());
+priorityDate().then(function(result) {
+  console.log(result);
+}, function(err) {
+  console.log(err); // Error: "It broke"
+});
