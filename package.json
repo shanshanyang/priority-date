@@ -1,6 +1,6 @@
 {
   "name": "priority-date",
-  "version": "1.0.0",
+  "version": "0.0.0-semantically-released",
   "description": "Greencard Priority Date checker",
   "main": "dist/index.js",
   "dependencies": {
@@ -19,7 +19,8 @@
     "cz-conventional-changelog": "1.1.5",
     "es6-promise": "3.1.2",
     "ghooks": "1.0.3",
-    "istanbul": "0.4.2",
+    "isparta": "4.0.0",
+    "istanbul": "1.0.0-alpha",
     "jsdom": "8.1.0",
     "mocha": "2.4.5",
     "request": "^2.69.0"
@@ -27,18 +28,23 @@
   "czConfig": {
     "path": "node_modules/ca-conventional-changelog"
   },
+	"config": {
+		"ghooks": {
+			"pre-commit": "npm run test:single && npm run check-coverage"
+		}
+	},
   "scripts": {
     "commit": "git-cz",
-    "check-coverage": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
-    "report-coverage": "cat ./coverage/lcov.info | codecov",
+    "check-coverage": "istanbul check-coverage --statements 50 --branches 50 --functions 50 --lines 50",
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "babel src/index.js -o dist/index.js",
-    "test:single": "istanbul cover -x *.test.js _mocha -- -R spec src/index.test.js --compilers js:babel-core/register",
+    "test:single": "babel-node ./node_modules/.bin/isparta cover --root src/ ./node_modules/.bin/_mocha -- -R spec src/index.test.js",
     "test": "mocha src/index.test.js -w --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shanshanyang/prioritydate.git"
+    "url": "git+https://github.com/shanshanyang/priority-date.git"
   },
   "keywords": [
     "greencard",
@@ -49,7 +55,7 @@
   "author": "Shanshan Yang <shanshanyang.ny@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shanshanyang/prioritydate/issues"
+    "url": "https://github.com/shanshanyang/priority-date/issues"
   },
-  "homepage": "https://github.com/shanshanyang/prioritydate#readme"
+  "homepage": "https://github.com/shanshanyang/priority-date#readme"
 }
