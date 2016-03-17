@@ -19,8 +19,7 @@
     "es6-promise": "3.1.2",
     "jsdom": "8.1.0",
     "mocha": "2.4.5",
-    "request": "^2.69.0",
-    "request-promise": "2.0.1"
+    "request": "^2.69.0"
   },
   "czConfig": {
     "path": "node_modules/ca-conventional-changelog"
@@ -29,7 +28,6 @@
     "commit": "git-cz",
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "babel src/index.js -o dist/index.js",
-    "postbuild": "babel src/demo.js -o dist/demo.js",
     "test": "mocha src/index.test.js -w --compilers js:babel-core/register"
   },
   "repository": {
@@ -39,7 +37,8 @@
   "keywords": [
     "greencard",
     "priority",
-    "date"
+    "date",
+    "scraper"
   ],
   "author": "Shanshan Yang <shanshanyang.ny@gmail.com>",
   "license": "MIT",
