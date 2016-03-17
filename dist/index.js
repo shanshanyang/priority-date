@@ -36,8 +36,8 @@ var parseData = function parseData(body) {
 				var $c = cheerio.load(body);
 				var script = $c('script[charset=utf-8]')[0].children[0].data;
 				// need to stip out the closure code for jsdom defaultView to work
-				var regex = /([^\*\/]*)\/\*/g;
-				script = script.match(regex)[1].replace('/*', '');
+				var regex = /([^\*\/]*)(?=\/\*)/g;
+				script = script.match(regex)[1];
 
 				var window = jsdom.jsdom('<script>' + script + '</script>').defaultView;
 
