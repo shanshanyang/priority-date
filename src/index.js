@@ -7,7 +7,14 @@ const createID = (month, year) => {
 	return `${month}-${year}`;
 };
 
-const parseData = body => {
+const parseScript = body => {
+  return cheerio.load(body)('script[charset=utf-8]')[0]
+          .children[0]
+          .data
+          .match(/([^\*\/]*)(?=\/\*)/g)[2];
+};
+
+const getData = body => {
   
 	jsdom.defaultDocumentFeatures = {
 	  FetchExternalResources: ['script'],
@@ -22,13 +29,10 @@ const parseData = body => {
   if (nextMonth > 12) nextMonth = 1;
 
 	const year = new Date().getFullYear(),
-	      script = cheerio.load(body)('script[charset=utf-8]')[0]
-	                .children[0]
-	                .data.match(/([^\*\/]*)(?=\/\*)/g)[1],
-	      window = jsdom.jsdom(`<script>${script}</script>`).defaultView,
+	      window = jsdom.jsdom(`<script>${parseScript(body)}</script>`).defaultView,
 	      nextID = createID(nextMonth, year),
 	      currentID = createID(currentMonth, year);
-	
+
 	return {
 	  [nextID]: window.upComingMonths, 
 	  [currentID]: window.thisMonths
@@ -47,7 +51,7 @@ const priorityDate = params => {
         if(error || response.statusCode != 200) {
           defer.reject(error);
         } else {
-          defer.resolve(parseData(body));
+          defer.resolve(getData(body));
         }
     });
     
