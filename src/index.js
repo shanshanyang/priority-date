@@ -15,7 +15,6 @@ const parseScript = body => {
 };
 
 const getData = body => {
-  
 	jsdom.defaultDocumentFeatures = {
 	  FetchExternalResources: ['script'],
 	  ProcessExternalResources: ['script'],
@@ -37,7 +36,6 @@ const getData = body => {
 	  [nextID]: window.upComingMonths, 
 	  [currentID]: window.thisMonths
 	};
-	
 };
 
 const priorityDate = params => {
