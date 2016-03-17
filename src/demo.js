@@ -1,4 +1,4 @@
-import { priorityDate } from './index';
+import priorityDate from './index';
 
 priorityDate().then(function(result) {
   console.log(result);
