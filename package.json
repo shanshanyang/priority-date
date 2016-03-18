@@ -34,6 +34,9 @@
 		}
 	},
   "scripts": {
+		"preversion": "npm run test:single",
+	  "version": "npm run build && git add -A dist",
+	  "postversion": "git push && git push --tags",
     "commit": "git-cz",
     "check-coverage": "istanbul check-coverage --statements 50 --branches 50 --functions 50 --lines 50",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/codecov",
