@@ -1,16 +1,18 @@
-# Greencard Priority Dates
+# Green Card Priority Dates
 
-[![travis build](https://api.travis-ci.org/shanshanyang/priority-date.svg)](https://travis-ci.org/shanshanyang/prioritydate)
-![version](https://img.shields.io/npm/v/priority-date.svg)
-![downloads](https://img.shields.io/npm/dt/priority-date.svg)
+[![travis build](https://api.travis-ci.org/shanshanyang/priority-date.svg)](https://travis-ci.org/shanshanyang/priority-date)
+[![version](https://img.shields.io/npm/v/priority-date.svg)](https://www.npmjs.com/package/priority-date)
 [![MIT License](https://img.shields.io/npm/l/priority-date.svg)](https://opensource.org/licenses/MIT)
 
-`import priorityDate from './index';`
+> priority-date gives you all the most recent priority date data from the U.S. Visa website.
 
-`
+## Usage
+```js
+import priorityDate from 'priority-date';
+
 priorityDate().then(function(result) {
-  console.log(result); // PriorityDate data
+  console.log(result); // Priority Date data
 }, function(err) {
   console.log(err); // Error
 });
-`
+```
