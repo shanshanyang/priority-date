@@ -39,9 +39,8 @@ var getData = function getData(body) {
 };
 
 var priorityDate = function priorityDate(params) {
-  var options = Object.assign({
-    url: 'http://travel.state.gov/content/visas/en/immigrate/immigrant-process/approved/checkdate.html'
-  }, params),
+  var _url = 'http://travel.state.gov/content/visas/en/immigrate/immigrant-process/approved/checkdate.html';
+  var options = Object.assign({ url: _url }, params),
       defer = Promise.defer();
 
   request.get(options.url, function (error, response, body) {
