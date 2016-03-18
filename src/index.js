@@ -1,10 +1,14 @@
-var cheerio = require('cheerio');
-var request = require('request');
-var Promise = require('bluebird');
-var jsdom = require('jsdom');
+const cheerio = require('cheerio'),
+			request = require('request'),
+			Promise = require('bluebird'),
+			jsdom = require('jsdom');
 
-const createID = (month, year) => {
-	return `${month}-${year}`;
+const createObjectKeys = () => {
+	const currentMonth = new Date().getUTCMonth() + 1,
+        nextMonth = (currentMonth === 12) ? 1 : currentMonth + 1,
+				year = new Date().getFullYear();
+
+	return [`${currentMonth}-${year}`, `${nextMonth}-${year}`];
 };
 
 const parseScript = body => {
@@ -21,20 +25,12 @@ const getData = body => {
 	  MutationEvents: '2.0',
 	  QuerySelector: false
 	}
-	
-  let currentMonth = new Date().getUTCMonth() + 1,
-        nextMonth = currentMonth + 1;
-  
-  if (nextMonth > 12) nextMonth = 1;
-
-	const year = new Date().getFullYear(),
-	      window = jsdom.jsdom(`<script>${parseScript(body)}</script>`).defaultView,
-	      nextID = createID(nextMonth, year),
-	      currentID = createID(currentMonth, year);
+	const window = jsdom.jsdom(`<script>${parseScript(body)}</script>`).defaultView,
+	      keys = createObjectKeys();
 
 	return {
-	  [nextID]: window.upComingMonths, 
-	  [currentID]: window.thisMonths
+	  [keys[1]]: window.upComingMonths,
+	  [keys[0]]: window.thisMonths
 	};
 };
 
@@ -43,7 +39,7 @@ const priorityDate = params => {
                       url: 'http://travel.state.gov/content/visas/en/immigrate/immigrant-process/approved/checkdate.html'
                   },params),
         defer = Promise.defer();
-        
+
   request.get(options.url,
       function (error, response, body) {
         if(error || response.statusCode != 200) {
@@ -52,7 +48,7 @@ const priorityDate = params => {
           defer.resolve(getData(body));
         }
     });
-    
+
     return defer.promise;
 };
 

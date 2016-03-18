@@ -6,13 +6,17 @@ Object.defineProperty(exports, "__esModule", {
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var cheerio = require('cheerio');
-var request = require('request');
-var Promise = require('bluebird');
-var jsdom = require('jsdom');
+var cheerio = require('cheerio'),
+    request = require('request'),
+    Promise = require('bluebird'),
+    jsdom = require('jsdom');
 
-var createID = function createID(month, year) {
-  return month + '-' + year;
+var createObjectKeys = function createObjectKeys() {
+  var currentMonth = new Date().getUTCMonth() + 1,
+      nextMonth = currentMonth === 12 ? 1 : currentMonth + 1,
+      year = new Date().getFullYear();
+
+  return [currentMonth + '-' + year, nextMonth + '-' + year];
 };
 
 var parseScript = function parseScript(body) {
@@ -28,18 +32,10 @@ var getData = function getData(body) {
     MutationEvents: '2.0',
     QuerySelector: false
   };
+  var window = jsdom.jsdom('<script>' + parseScript(body) + '</script>').defaultView,
+      keys = createObjectKeys();
 
-  var currentMonth = new Date().getUTCMonth() + 1,
-      nextMonth = currentMonth + 1;
-
-  if (nextMonth > 12) nextMonth = 1;
-
-  var year = new Date().getFullYear(),
-      window = jsdom.jsdom('<script>' + parseScript(body) + '</script>').defaultView,
-      nextID = createID(nextMonth, year),
-      currentID = createID(currentMonth, year);
-
-  return _ref = {}, _defineProperty(_ref, nextID, window.upComingMonths), _defineProperty(_ref, currentID, window.thisMonths), _ref;
+  return _ref = {}, _defineProperty(_ref, keys[1], window.upComingMonths), _defineProperty(_ref, keys[0], window.thisMonths), _ref;
 };
 
 var priorityDate = function priorityDate(params) {
