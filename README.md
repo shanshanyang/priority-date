@@ -1,4 +1,4 @@
-# Green Card Priority Dates
+# Green Card Priority Date
 
 [![travis build](https://api.travis-ci.org/shanshanyang/priority-date.svg)](https://travis-ci.org/shanshanyang/priority-date)
 [![version](https://img.shields.io/npm/v/priority-date.svg)](https://www.npmjs.com/package/priority-date)
