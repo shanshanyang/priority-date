@@ -3,6 +3,7 @@
 [![travis build](https://api.travis-ci.org/shanshanyang/priority-date.svg)](https://travis-ci.org/shanshanyang/priority-date)
 [![version](https://img.shields.io/npm/v/priority-date.svg)](https://www.npmjs.com/package/priority-date)
 [![Coverage Status](https://coveralls.io/repos/github/shanshanyang/priority-date/badge.svg?branch=master)](https://coveralls.io/github/shanshanyang/priority-date?branch=master)
+[![dependencies](https://david-dm.org/shanshanyang/priority-date.svg)](https://david-dm.org/shanshanyang/priority-date#info=dependencies)
 [![devDependencies](https://david-dm.org/shanshanyang/priority-date/dev-status.svg)](https://david-dm.org/shanshanyang/priority-date#info=devDependencies)
 [![MIT License](https://img.shields.io/npm/l/priority-date.svg)](https://opensource.org/licenses/MIT)
 
