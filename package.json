@@ -17,7 +17,6 @@
     "istanbul": "0.4.2",
     "jsdom": "8.1.0",
     "mocha": "2.4.5",
-    "mocha-lcov-reporter": "1.2.0",
     "request": "2.69.0"
   },
   "config": {
@@ -26,7 +25,7 @@
     }
   },
   "scripts": {
-    "check-coverage": "istanbul check-coverage --statements 50 --branches 50 --functions 50 --lines 50",
+    "check-coverage": "istanbul check-coverage --statements 50 --branches 40 --functions 50 --lines 50",
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "babel src/index.js -o dist/index.js",
     "test:single": "babel-node ./node_modules/.bin/isparta cover --root src/ ./node_modules/.bin/_mocha -- -R spec src/index.test.js",

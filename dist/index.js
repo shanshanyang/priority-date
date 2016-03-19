@@ -9,7 +9,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var cheerio = require('cheerio'),
     request = require('request'),
     Promise = require('bluebird'),
-    jsdom = require('jsdom');
+    jsdom = require('jsdom'),
+    regex = /([^\*\/]*)(?=\/\*)/g;
 
 var createObjectKeys = function createObjectKeys() {
   var currentMonth = new Date().getUTCMonth() + 1,
@@ -19,8 +20,8 @@ var createObjectKeys = function createObjectKeys() {
   return [currentMonth + '-' + year, nextMonth + '-' + year];
 };
 
-var parseScript = function parseScript(body) {
-  return cheerio.load(body)('script[charset=utf-8]')[0].children[0].data.match(/([^\*\/]*)(?=\/\*)/g)[2];
+var testScript = function testScript(script) {
+  return regex.test(script);
 };
 
 var getData = function getData(body) {
@@ -32,7 +33,13 @@ var getData = function getData(body) {
     MutationEvents: '2.0',
     QuerySelector: false
   };
-  var window = jsdom.jsdom('<script>' + parseScript(body) + '</script>').defaultView,
+  var script = cheerio.load(body)('script[charset=utf-8]')[0].children[0].data;
+
+  if (!testScript(script)) {
+    return false;
+  }
+
+  var window = jsdom.jsdom('<script>' + script.match(regex)[2] + '</script>').defaultView,
       keys = createObjectKeys();
 
   return _ref = {}, _defineProperty(_ref, keys[1], window.upComingMonths), _defineProperty(_ref, keys[0], window.thisMonths), _ref;

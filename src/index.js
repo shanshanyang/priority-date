@@ -1,7 +1,8 @@
 const cheerio = require('cheerio'),
       request = require('request'),
       Promise = require('bluebird'),
-      jsdom = require('jsdom');
+      jsdom = require('jsdom'),
+      regex = /([^\*\/]*)(?=\/\*)/g;
 
 const createObjectKeys = () => {
   const currentMonth = new Date().getUTCMonth() + 1,
@@ -11,11 +12,8 @@ const createObjectKeys = () => {
   return [`${currentMonth}-${year}`, `${nextMonth}-${year}`];
 };
 
-const parseScript = body => {
-  return cheerio.load(body)('script[charset=utf-8]')[0]
-          .children[0]
-          .data
-          .match(/([^\*\/]*)(?=\/\*)/g)[2];
+const testScript = script => {
+  return regex.test(script);
 };
 
 const getData = body => {
@@ -25,7 +23,13 @@ const getData = body => {
     MutationEvents: '2.0',
     QuerySelector: false
   }
-  const window = jsdom.jsdom(`<script>${parseScript(body)}</script>`).defaultView,
+  const script = cheerio.load(body)('script[charset=utf-8]')[0]
+          .children[0]
+          .data;
+
+  if (!testScript(script)) { return false; }
+
+  const window = jsdom.jsdom(`<script>${script.match(regex)[2]}</script>`).defaultView,
         keys = createObjectKeys();
 
   return {

@@ -5,10 +5,14 @@ const chaiAsPromised = require('chai-as-promised');
 const month = new Date().getUTCMonth() + 1;
 const year = new Date().getFullYear();
 const keys = [`${month}-${year}`, `${month+1}-${year}`];
-let result, current_familySponsered, current_employmentBased,next_familySponsered,next_employmentBased;
+let result,
+    current_familySponsered,
+    current_employmentBased,
+    next_familySponsered,
+    next_employmentBased;
 chai.use(chaiAsPromised);
 
-describe('Priority-Date', () => {
+describe('Priority-Date Public functions', () => {
     before(() => {
       result = priorityDate();
       current_familySponsered = priorityDate().then(obj => {
