@@ -10,7 +10,10 @@
 
 ## Usage
 ```js
+// ES6
 import priorityDate from 'priority-date';
+// CommonJS
+// var priorityDate = require('priority-date').default;
 
 priorityDate().then(function(result) {
   console.log(result); // Priority Date data
