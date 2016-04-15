@@ -1,5 +1,7 @@
 # Green Card Priority Date
 
+> This package is deprecated due to recent update to U.S Visa website 
+
 [![travis build](https://api.travis-ci.org/shanshanyang/priority-date.svg)](https://travis-ci.org/shanshanyang/priority-date)
 [![version](https://img.shields.io/npm/v/priority-date.svg)](https://www.npmjs.com/package/priority-date)
 [![Coverage Status](https://coveralls.io/repos/github/shanshanyang/priority-date/badge.svg?branch=master)](https://coveralls.io/github/shanshanyang/priority-date?branch=master)
